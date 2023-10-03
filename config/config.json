@@ -1,0 +1,38 @@
+{
+    "dev": {
+        "username": "root",
+        "password": null,
+        "database": "",
+        "host": "",
+        "dialect": "mysql",
+        "logLevel": "debug",
+        "operatorsAliases": false
+    },
+    "qa": {
+        "username": "root",
+        "password": null,
+        "database": "",
+        "host": "",
+        "dialect": "mysql",
+        "logLevel": "debug",
+        "operatorsAliases": false
+    },
+    "stage": {
+        "username": "root",
+        "password": null,
+        "database": "",
+        "host": "",
+        "dialect": "mysql",
+        "logLevel": "debug",
+        "operatorsAliases": false
+    },
+    "production": {
+        "username": "root",
+        "password": null,
+        "database": "",
+        "host": "",
+        "dialect": "mysql",
+        "logLevel": "debug",
+        "operatorsAliases": false
+    }
+}

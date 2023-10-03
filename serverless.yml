@@ -1,0 +1,63 @@
+service: mss-employee-certificate-store-app
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+  memorySize: 128
+  timeout: 5
+  environment:
+    NODE_ENV: dev
+    DynamoDB_TABLE_NAME: employee
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - "ssm:GetParameters"
+            - "ssm:GetParameter"
+            - "s3:*"
+            - "s3-object-lambda:*"
+            - "dynamodb:*"
+          Resource:
+            - "*"
+
+plugins:
+  - serverless-offline
+  - serverless-prune-plugin
+
+functions:
+  app:
+    handler: app.handler
+    events:
+      - http:
+          path: /api/getCertificate/{employeeId}
+          method: GET
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Pragma
+            allowCredentials: false
+
+resources:
+  Resources:
+    employee:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: employee
+        AttributeDefinitions:
+          - AttributeName: employeeId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: employeeId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
