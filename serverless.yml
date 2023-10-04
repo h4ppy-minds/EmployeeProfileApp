@@ -27,6 +27,8 @@ provider:
   # you can overwrite defaults here
   stage: dev
   region: us-east-1
+  memorySize: 128
+  timeout: 6
 
   # you can add statements to the Lambda function's IAM Role here
   iam:
