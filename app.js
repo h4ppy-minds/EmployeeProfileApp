@@ -1,11 +1,10 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
+// import { createRequire } from "module";
+// const require = createRequire(import.meta.url);
 const serverless = require("serverless-http");
 const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const path = require("path");
 // This will be our application entry. We'll setup our server here.
 const http = require("http");
 const cors = require("cors");
@@ -37,9 +36,11 @@ app.use(function (req, res, next) {
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   next();
 });
-import profileRoute from "./routes/mss.getcertificate.route.mjs";
-profileRoute(app, router);
-//require("./routes/mss.getcertificate.route.mjs")(app, router);
+// import profileRoute from "./routes/mss.getcertificate.route.js";
+// profileRoute(app, router);
+// import profileRoute from "./routes/mss.getcertificate.route.js";
+// profileRoute(app, router);
+require("./routes/mss.getcertificate.route")(app, router);
 
 app.use(function (err, req, res, next) {
   console.log("send");
@@ -64,5 +65,5 @@ app.use(function (err, req, res, next) {
 // app.set("port", port);
 // const server = http.createServer(app);
 // server.listen(port);
-// export default app;
+//export default app;
 module.exports.handler = serverless(app);

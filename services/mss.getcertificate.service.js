@@ -1,21 +1,32 @@
-import { logger } from "../shared/logger.mjs";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const statusCode = require("../shared/statusCodes.json");
-//const statusCode = require("../shared/statusCodes");
-const moment = require("moment");
-const {
-  DynamoDBClient,
-  CreateTableCommand,
-  GetItemCommand,
-  PutItemCommand,
-} = require("@aws-sdk/client-dynamodb");
+//import { logger } from "../shared/logger.js";
+// import { createRequire } from "module";
+// const require = createRequire(import.meta.url);
+//const statusCode = require("../shared/statusCodes.json");
+const logger = require("../shared/logger");
+const statusCode = require("../shared/statusCodes");
+//const moment = require("moment");
+// const {
+//   DynamoDBClient,
+//   CreateTableCommand,
+//   GetItemCommand,
+//   PutItemCommand,
+// } = require("@aws-sdk/client-dynamodb");
+// const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
+// const client = new DynamoDBClient({ region: "us-east-1" });
+const AWS = require("@aws-sdk/client-dynamodb");
+const DynamoDBClient = AWS.DynamoDBClient;
+const CreateTableCommand = AWS.CreateTableCommand;
+const GetItemCommand = AWS.GetItemCommand;
+const PutItemCommand = AWS.PutItemCommand;
+
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
+
 const client = new DynamoDBClient({ region: "us-east-1" });
+
 // import db from "../models/dynamoIndex.mjs";
 // import { EmployeeData } from "../models/EmployeeData";
 
-export const createProfile = async (req, res) => {
+module.exports.createProfile = async (req, res) => {
   try {
     logger.info("Entered into Employee create Profile Logic");
   } catch (err) {
@@ -27,7 +38,7 @@ export const createProfile = async (req, res) => {
   }
 };
 
-export const getProfile = async (req, res) => {
+module.exports.getProfile = async (req, res) => {
   try {
     logger.info("Entered into Employee Fetch Profile Logic");
     console.log(req.params);
