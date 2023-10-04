@@ -4,6 +4,12 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      - echo "Installing Node.js and npm..."
+      - apt-get update
+      - apt-get install -y nodejs npm
+      - node -v
+      - npm -v
+      - echo "Installing project dependencies..."
       - npm install -g serverless
       - npm install
   build:
@@ -12,3 +18,33 @@ phases:
 cache:
   paths:
     - node_modules
+
+artifacts:
+  files: "**/*"
+  discard-paths: yes
+# version: 0.2
+
+# phases:
+#   pre_build:
+#     commands:
+#       - echo "Installing Node.js and npm..."
+#       - apt-get update
+#       - apt-get install -y nodejs npm
+#       - node -v
+#       - npm -v
+#       - echo "Installing project dependencies..."
+#       - npm install -g serverless
+#       - npm install
+
+#   build:
+#     commands:
+#       - echo "Running build commands..."
+#       - serverless deploy --stage dev
+#       # Add any build commands specific to your Node.js application
+# cache:
+#   paths:
+#     - node_modules
+
+# artifacts:
+#   files: '**/*'
+#   discard-paths: yes
